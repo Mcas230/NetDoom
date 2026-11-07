@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Kaboom</title>
+</head>
+<body>
+  <script type="module">
+    import kaboom from "https://unpkg.com/kaboom@3000.0.1/dist/kaboom.mjs";
+
+    kaboom({
+      width: 960,
+      height: 600,
+      background: [20, 20, 30],
+    });
+
+    console.log("Kaboom:", VERSION);
+
+    onDraw(() => {
+      drawRect({
+        pos: vec2(100, 100),
+        width: 200,
+        height: 100,
+        color: rgb(255, 0, 0),
+      });
+    });
+  </script>
+</body>
+</html>
