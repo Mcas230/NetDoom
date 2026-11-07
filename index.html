@@ -1,13 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DOOM - Kaboom Edition</title>
-  <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NETDOOM</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <div id="game"></div>
-  <script type="module" src="./src/main.js"></script>
+    <div id="game"></div>
+
+    <div id="main-menu" class="main-menu">
+        <div class="menu-panel">
+        <p class="menu-kicker">HELL SYSTEM // ONLINE</p>
+        <h1 class="menu-title">NETDOOM</h1>
+        <p class="menu-subtitle">THE GATES ARE OPEN</p>
+
+        <button id="start-game" class="menu-start" type="button">
+            NEW GAME
+        </button>
+
+        <p class="menu-hint">
+            WASD — MOVE
+        </p>
+        <p class="menu-hint">
+            LEFT/RIGHT ARROW — AIM
+        </p>
+        <p class="menu-hint">
+            SPACE BAR — SHOOT
+        </p>
+        </div>
+    </div>
+
+    <script type="module" src="./src/main.js"></script>
 </body>
 </html>

@@ -11,9 +11,11 @@ const HEIGHT = 600;
 const FOV = Math.PI / 3;
 const MAX_DEPTH = 14;
 
+// Crear canvas
 const canvas = document.createElement("canvas");
 document.querySelector("#game").appendChild(canvas);
 
+// Inicializar Kaboom
 kaboom({
   global: true,
   width: WIDTH,
@@ -23,19 +25,17 @@ kaboom({
   crisp: true,
 });
 
-console.log("Kaboom iniciado:", VERSION);
+// Elementos del menú
+const menu = document.querySelector("#main-menu");
+const startButton = document.querySelector("#start-game");
 
-onUpdate(() => {
-  console.log("UPDATE OK");
-});
-
-onDraw(() => {
-  console.log("DRAW OK");
-});
-
+// Crear jugador y enemigos
 const player = createPlayer();
 const enemies = createEnemies();
+
+// Estado del juego
 const gameState = {
+  started: false,
   gameOver: false,
   victory: false,
   message: "",
@@ -43,18 +43,40 @@ const gameState = {
   flashTime: 0,
 };
 
-const isGameActive = () => !gameState.gameOver && !gameState.victory;
+// El juego solo está activo después de pulsar NEW GAME
+const isGameActive = () =>
+  gameState.started &&
+  !gameState.gameOver &&
+  !gameState.victory;
 
+// Iniciar partida desde el menú
+if (!menu || !startButton) {
+  console.error("NETDOOM: no se encontró el menú o el botón");
+} else {
+  startButton.addEventListener("click", () => {
+    console.log("NETDOOM: botón NEW GAME pulsado");
+
+    gameState.started = true;
+    menu.classList.add("is-hidden");
+  });
+}
+
+// Registrar controles
 registerPlayerControls(player, isGameActive);
 registerWeaponControls(player, enemies, gameState, MAX_DEPTH);
 
+// Reiniciar después de perder o ganar
 onKeyPress("r", () => {
-  if (!isGameActive()) {
+  if (gameState.started && !isGameActive()) {
     location.reload();
   }
 });
 
+// Actualización del juego
 onUpdate(() => {
+  // No actualizar nada mientras estamos en el menú
+  if (!gameState.started) return;
+
   const delta = dt();
 
   updateWeapons(player, gameState, delta);
@@ -73,8 +95,24 @@ onUpdate(() => {
   }
 });
 
+// Dibujado del juego
 onDraw(() => {
-  const depthBuffer = renderWorld(player, WIDTH, HEIGHT, FOV, MAX_DEPTH);
-  renderEnemies(player, enemies, depthBuffer, WIDTH, HEIGHT, FOV);
+  const depthBuffer = renderWorld(
+    player,
+    WIDTH,
+    HEIGHT,
+    FOV,
+    MAX_DEPTH
+  );
+
+  renderEnemies(
+    player,
+    enemies,
+    depthBuffer,
+    WIDTH,
+    HEIGHT,
+    FOV
+  );
+
   renderHUD(player, enemies, gameState, WIDTH, HEIGHT);
 });

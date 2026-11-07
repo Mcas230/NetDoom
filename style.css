@@ -24,3 +24,93 @@ canvas {
   height: 100%;
   image-rendering: pixelated;
 }
+
+/* =========================
+   MENÚ PRINCIPAL - NETDOOM
+========================= */
+
+.main-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  background:
+    radial-gradient(ellipse at center, rgba(55, 0, 15, 0.45), transparent 65%),
+    rgba(0, 0, 0, 0.94);
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.main-menu.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.menu-panel {
+  width: 100%;
+  height: 100%;
+  padding: 55px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: none;
+  background: rgba(8, 5, 8, 0.5);
+  box-shadow:
+    inset 0 0 60px rgba(255, 0, 45, 0.12);
+}
+
+.menu-kicker {
+  color: #ff334f;
+  font-size: 20px;
+  letter-spacing: 5px;
+  margin-bottom: 20px;
+}
+
+.menu-title {
+  margin: 0;
+  color: #f2e8e8;
+  font-size: clamp(65px, 12vw, 120px);
+  letter-spacing: 8px;
+  text-shadow:
+    0 0 8px #ff003c,
+    0 0 25px rgba(255, 0, 60, 0.65);
+}
+
+.menu-subtitle {
+  color: #a64b5d;
+  font-size: 24px;
+  letter-spacing: 6px;
+  margin: 15px 0 45px;
+}
+
+.menu-start {
+  padding: 15px 45px;
+  margin-bottom: 35px;
+  border: 1px solid #ff1744;
+  background: transparent;
+  color: #fff;
+  font-family: monospace;
+  font-size: 26px;
+  letter-spacing: 4px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.menu-start:hover {
+  background: #b5002b;
+  box-shadow: 0 0 20px rgba(255, 0, 60, 0.6);
+  transform: scale(1.04);
+}
+
+.menu-hint {
+  margin: 8px 0;
+  padding: 0;
+  color: #777;
+  font-size: 18px;
+  letter-spacing: 2px;
+  line-height: 1.2;
+}
